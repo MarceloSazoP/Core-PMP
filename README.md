@@ -1,50 +1,66 @@
-# Core-PMP
+# CORE-PMP
 
-Plataforma empresarial de gestión de proyectos, trabajo y colaboración de **CORE Tecnología Empresarial**.
+**Enterprise Project, Work, Governance & Improvement Platform** — CORE Tecnología Empresarial SpA.
 
-> Planifica. Ejecuta. Colabora. Controla.
+> Planifica. Ejecuta. Colabora. Controla. Mejora.
 
 ## Qué es
 
-Core-PMP reúne proyectos, equipos, tareas, metodologías ágiles, planificación, tickets, comunicación y control empresarial en una sola plataforma. Permite administrar proyectos bajo metodología **tradicional, Kanban, Scrum o híbrida**, seleccionada por el Jefe de Proyecto (JP) según las necesidades de cada proyecto.
+CORE-PMP es la plataforma empresarial para gestionar proyectos, trabajo, equipos, colaboración, gobierno y mejora continua. Permite crear y administrar proyectos combinando metodologías **tradicional, Kanban, Scrum o híbridas**, e incorpora **Six Sigma (DMAIC)** como framework de mejora e **ISO/IEC 27001** como framework de gobierno y compliance — configurados por el Jefe de Proyecto (JP) según cada proyecto.
 
-## Principio fundamental
+No es solo un gestor de tareas, una herramienta Kanban/Scrum o un sistema de tickets: es la capa empresarial de ejecución, colaboración, control y mejora del ecosistema CORE. Puede operar de forma **independiente** del resto del ecosistema.
 
-Un **motor común de trabajo**: la metodología no crea productos distintos, solo configura cómo se organizan y visualizan las mismas entidades centrales (Proyecto, Tarea, Usuario, Equipo, Ticket, etc.).
+## Principio arquitectónico central
+
+Un **Work Engine** común: la metodología nunca duplica entidades (`scrum_tasks`, `kanban_tasks`, etc.), siempre existe una única `TASK` que se organiza y visualiza distinto según el framework activo.
+
+## Los 4 motores
 
 ```
-                    CORE-PMP
-                       │
-               Project Work Engine
-                       │
-      Tradicional · Kanban · Scrum
-                       │
-                    Híbrido
+CORE-PMP
+├── 1. Project Engine                — Portfolios, Programs, Projects, WBS, Gantt, baseline
+├── 2. Delivery Engine                — Traditional, Kanban, Scrum, Hybrid
+├── 3. Work & Collaboration Engine    — Tasks, Tickets, Teams, Chat, Calendar, Documents
+└── 4. Governance & Improvement Engine — Risk, ISO/IEC 27001, Audits, Six Sigma/DMAIC, KPIs
 ```
 
-## Módulos principales
+## Jerarquía de datos
 
-Dashboard, Portafolios, Proyectos, Planning (WBS/Gantt), Agile (Backlog/Sprints/Kanban), Work Management, Equipos, Tickets, Colaboración (Chat), Recursos, Timesheets, Control Financiero, Riesgos, Issues, Documentos, Calendario, Notificaciones, Reportes, Integraciones, Administración.
+```
+Enterprise Tenant (Core Enterprise)
+  └── Core-PMP
+       └── Portfolio → Program → Project
+```
+
+Toda entidad de Core-PMP pertenece a un `tenant_id`.
 
 ## Ecosistema CORE
 
-Core-PMP se integra con el resto del ecosistema a través del **tenant** (identidad y contrato administrados por Core Enterprise), manteniendo independencia funcional:
+Core-PMP funciona de forma independiente, y se integra vía **tenant** cuando corresponde:
 
-- **Core Enterprise** — identidad, tenant, usuarios, entitlements
-- **CorePyme** — vinculación con empresas
-- **Core Contador** — costos y presupuesto oficial
-- **Core Platform** — APIs, eventos, webhooks
+- **Core Enterprise** — identidad, tenants, usuarios, contratos, entitlements
+- **CorePyme** — referencias de empresa, sucursal, cliente, proveedor
+- **Core Contador** — costos, centros de costo, presupuesto (la contabilidad oficial vive ahí)
+- **Core Tributario / Core Bancario** — integraciones de fases posteriores
 
 ## Stack técnico
 
 - **Frontend:** Next.js, TypeScript, React
-- **Backend:** Next.js API / microservicios
-- **Base de datos:** PostgreSQL
+- **Backend:** TypeScript (desacoplado, portable a .NET si el crecimiento lo justifica)
+- **Base de datos:** PostgreSQL / Supabase
 - **Auth:** Core Enterprise (tenant, identity, RBAC)
-- **Realtime:** WebSocket / Supabase Realtime
+- **Realtime:** obligatorio para chat, Kanban, Scrum board, notificaciones y presencia
+
+## Entorno local
+
+```bash
+cd backend && npm run dev    # http://localhost:3011
+cd frontend && npm run dev   # http://localhost:3010
+```
+
+En desarrollo, el backend autentica automáticamente al usuario admin del tenant (sin login manual). Nunca se activa en producción.
 
 ## Documentación
 
-Especificación completa de arquitectura: [docs/arq.md](docs/arq.md)
-
-Instrucciones de proyecto para Claude Code: [CLAUDE.md](CLAUDE.md)
+- Especificación completa (Source of Truth): [docs/arq.md](docs/arq.md)
+- Instrucciones de proyecto para Claude Code: [CLAUDE.md](CLAUDE.md)
