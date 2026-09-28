@@ -8,10 +8,10 @@ export const statusLabel: Record<ProjectStatus, string> = {
 };
 
 export const statusColor: Record<ProjectStatus, string> = {
-  ON_TRACK: "var(--status-ontrack)",
-  AT_RISK: "var(--status-atrisk)",
-  BLOCKED: "var(--status-blocked)",
-  COMPLETED: "var(--status-info)",
+  ON_TRACK: "var(--color-success)",
+  AT_RISK: "var(--color-warning)",
+  BLOCKED: "var(--color-danger)",
+  COMPLETED: "var(--color-info)",
 };
 
 export const kpis = [

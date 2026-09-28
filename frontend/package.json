@@ -9,6 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@core-tecnologias-empresariales/core-shell": "file:../../core-npm/packages/core-shell",
+    "@core-tecnologias-empresariales/core-ui": "file:../../core-npm/packages/core-ui",
+    "lucide-react": "^1.48.0",
     "next": "16.3.6",
     "react": "19.2.8",
     "react-dom": "19.2.8"
