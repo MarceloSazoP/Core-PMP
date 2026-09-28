@@ -1,4 +1,7 @@
 import { kpis, projects, risks, milestones, resourceLoad, statusLabel, statusColor } from "@/lib/mock-dashboard";
+import { ProgressBar } from "@/components/ProgressBar";
+import { StatusPill } from "@/components/StatusPill";
+import { AnimatedNumber } from "@/components/AnimatedNumber";
 
 export default function DashboardPage() {
   return (
@@ -8,7 +11,9 @@ export default function DashboardPage() {
           {kpis.map((kpi) => (
             <div key={kpi.label} className="bg-bg-100 border border-border rounded-lg p-4">
               <p className="text-xs text-text-200 mb-1">{kpi.label}</p>
-              <p className={`text-2xl font-semibold ${kpi.mono ? "font-mono" : ""}`}>{kpi.value}</p>
+              <p className={`text-2xl font-semibold ${kpi.mono ? "font-mono" : ""}`}>
+                <AnimatedNumber value={kpi.value} format={kpi.format} />
+              </p>
             </div>
           ))}
         </section>
@@ -35,21 +40,13 @@ export default function DashboardPage() {
                   <td className="px-5 py-3">
                     <div className="flex items-center gap-2">
                       <div className="w-24 h-1.5 rounded-full bg-bg-300 overflow-hidden">
-                        <div
-                          className="h-full rounded-full"
-                          style={{ width: `${p.progress}%`, background: statusColor[p.status] }}
-                        />
+                        <ProgressBar value={p.progress} color={statusColor[p.status]} />
                       </div>
                       <span className="text-xs text-text-200">{p.progress}%</span>
                     </div>
                   </td>
                   <td className="px-5 py-3">
-                    <span
-                      className="text-xs font-medium px-2 py-0.5 rounded-full"
-                      style={{ color: statusColor[p.status], backgroundColor: `${statusColor[p.status]}1a` }}
-                    >
-                      {statusLabel[p.status]}
-                    </span>
+                    <StatusPill label={statusLabel[p.status]} color={statusColor[p.status]} />
                   </td>
                   <td className="px-5 py-3 text-right font-mono">{p.budget}</td>
                 </tr>
@@ -98,10 +95,7 @@ export default function DashboardPage() {
                     <span className="text-text-200">{r.load}%</span>
                   </div>
                   <div className="w-full h-1.5 rounded-full bg-bg-300 overflow-hidden">
-                    <div
-                      className="h-full rounded-full"
-                      style={{ width: `${r.load}%`, background: r.load > 85 ? "var(--color-danger)" : "var(--color-info)" }}
-                    />
+                    <ProgressBar value={r.load} color={r.load > 85 ? "var(--color-danger)" : "var(--color-info)"} />
                   </div>
                 </li>
               ))}

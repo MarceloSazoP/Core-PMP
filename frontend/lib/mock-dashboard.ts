@@ -14,11 +14,13 @@ export const statusColor: Record<ProjectStatus, string> = {
   COMPLETED: "var(--color-info)",
 };
 
-export const kpis = [
-  { label: "Proyectos activos", value: "12" },
-  { label: "Avance promedio", value: "68%" },
-  { label: "Presupuesto ejecutado", value: "$482.5M", mono: true },
-  { label: "Tickets abiertos", value: "23" },
+export type KpiFormat = "int" | "percent" | "currencyM";
+
+export const kpis: { label: string; value: number; format: KpiFormat; mono?: boolean }[] = [
+  { label: "Proyectos activos", value: 12, format: "int" },
+  { label: "Avance promedio", value: 68, format: "percent" },
+  { label: "Presupuesto ejecutado", value: 482.5, format: "currencyM", mono: true },
+  { label: "Tickets abiertos", value: 23, format: "int" },
 ];
 
 export const projects: { code: string; name: string; manager: string; progress: number; status: ProjectStatus; budget: string }[] = [

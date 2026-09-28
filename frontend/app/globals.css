@@ -43,3 +43,11 @@ body {
   color: var(--text-100);
   font-family: var(--font-sans);
 }
+
+/* Registro necesario para que WAAPI interpole --num como número (curva bezier nativa del
+   navegador) en vez de tratarlo como texto discreto. Usado por AnimatedNumber. */
+@property --num {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
