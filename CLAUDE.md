@@ -3,12 +3,14 @@
 ## Contexto
 **CORE-PMP** es la plataforma empresarial de gestión de proyectos, trabajo, colaboración, gobierno y mejora continua del ecosistema CORE Tecnología Empresarial. v2.0.
 
-**Especificación oficial (Source of Truth):** [docs/arq.md](docs/arq.md)
+**Especificación oficial (Source of Truth):**
+- [docs/arq.md](docs/arq.md) — Master Specification v2.0
+- [docs/anexo1.md](docs/anexo1.md) — Anexo A: Lean e Ingeniería de Mejora v1.0 (extensión aprobada)
 
 ## Regla para Claude Code (sección 111 del arq.md)
-`docs/arq.md` es la fuente de verdad del dominio y producto. **No debo:**
+`docs/arq.md` y sus anexos son la fuente de verdad del dominio y producto. **No debo:**
 - inventar entidades ni duplicarlas
-- crear metodologías fuera del modelo (Traditional, Kanban, Scrum, Hybrid, y Six Sigma/ISO como frameworks aparte)
+- crear metodologías fuera del modelo (Traditional, Kanban, Scrum, Hybrid, Six Sigma, Lean, ISO 27001 — ver "Frameworks soportados")
 - introducir dependencias arquitectónicas sin justificación
 - modificar contratos (API, schema) silenciosamente
 - implementar módulos fuera de alcance sin registrarlo
@@ -38,15 +40,19 @@ Enterprise Tenant (Core Enterprise)
 ```
 Toda entidad de PMP pertenece a un `tenant_id` (nunca solo a un `user_id`).
 
-## Frameworks soportados (no son "metodologías sueltas")
+## Frameworks soportados (no son "metodologías sueltas") — alcance oficial
 ```
 Framework
 ├── Management   → Traditional
-├── Delivery     → Scrum, Kanban
-├── Improvement  → Six Sigma (DMAIC)
+├── Delivery     → Scrum, Kanban, Hybrid
+├── Improvement  → Six Sigma (DMAIC), Lean
 └── Governance   → ISO/IEC 27001
 ```
-Un proyecto puede combinar varios simultáneamente (ej. Traditional + Scrum + Kanban + ISO 27001).
+Un proyecto puede combinar varios simultáneamente (ej. Traditional + Scrum + Kanban + ISO 27001 + Lean).
+
+Todo lo demás mencionado en los documentos (Lean Six Sigma, PDCA, Theory of Constraints, Kaizen/5S como módulos independientes) es **extensibilidad futura**, no alcance comprometido. Kaizen es una práctica dentro de Lean, no un framework aparte.
+
+**Principio rector (anexo1.md §30):** no acumular metodologías — proveer un núcleo común capaz de ejecutar distintos modelos de gestión, entrega, mejora y gobierno solo cuando el proyecto los necesite. Antes de crear una entidad Lean/Six Sigma, evaluar si el Work Engine o el Framework Engine ya la representa.
 
 ## Roles
 - **Plataforma:** PMP_ADMIN, PMP_MANAGER, PMP_USER, PMP_VIEWER
@@ -103,9 +109,11 @@ npm run tenant -- delete --tax-id 7240020-8
 `create` inserta el tenant, el usuario owner (si no existe) y la vinculación con la app `core-pmp`. `delete` limpia tenant, memberships y tenant_applications asociados. Ambas operaciones corren en una transacción sobre `core_enterprise`.
 
 ## Roadmap (11 fases)
-Foundation → Work Engine → Project Planning (WBS/Gantt) → Kanban → Scrum → Collaboration → Ticketing → Control (riesgos/presupuesto) → Governance (ISO 27001) → Improvement (Six Sigma) → Ecosystem (CorePyme, Core Contador, Core Tributario, Core Bancario).
+Foundation → Work Engine → Project Planning (WBS/Gantt) → Kanban → Scrum → Collaboration → Ticketing → Control (riesgos/presupuesto) → Governance (ISO 27001) → Improvement (Six Sigma + Lean) → Ecosystem (CorePyme, Core Contador, Core Tributario, Core Bancario).
 
-El **MVP comercial** (sección 101) no incluye Governance/Improvement completos: ISO 27001 y Six Sigma parten como estructuras de dominio y evolucionan después.
+Roadmap Lean específico (anexo1.md §27): L1 Foundation → L2 Improvement (waste, iniciativas, acciones) → L3 Flow (VSM, lead/cycle time) → L4 Advanced (Kaizen, 5S, Before/After) → L5 Integrated (Lean + Six Sigma + Kanban + ISO 27001).
+
+El **MVP comercial** (sección 101) no incluye Governance/Improvement completos: ISO 27001, Six Sigma y Lean parten como estructuras de dominio y evolucionan después.
 
 ## Principio de desarrollo
 Antes de implementar: 1) definir dominio → 2) modelo de datos → 3) contratos → 4) permisos → 5) eventos → 6) API → 7) UX → 8) documentar → 9) implementar → 10) probar. No partir directo por pantallas.

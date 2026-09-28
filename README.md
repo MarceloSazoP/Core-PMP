@@ -6,7 +6,7 @@
 
 ## Qué es
 
-CORE-PMP es la plataforma empresarial para gestionar proyectos, trabajo, equipos, colaboración, gobierno y mejora continua. Permite crear y administrar proyectos combinando metodologías **tradicional, Kanban, Scrum o híbridas**, e incorpora **Six Sigma (DMAIC)** como framework de mejora e **ISO/IEC 27001** como framework de gobierno y compliance — configurados por el Jefe de Proyecto (JP) según cada proyecto.
+CORE-PMP es la plataforma empresarial para gestionar proyectos, trabajo, equipos, colaboración, gobierno y mejora continua. Permite crear y administrar proyectos combinando metodologías **tradicional, Kanban, Scrum o híbridas**, e incorpora **Six Sigma (DMAIC)** y **Lean** como frameworks de mejora e **ISO/IEC 27001** como framework de gobierno y compliance — configurados por el Jefe de Proyecto (JP) según cada proyecto.
 
 No es solo un gestor de tareas, una herramienta Kanban/Scrum o un sistema de tickets: es la capa empresarial de ejecución, colaboración, control y mejora del ecosistema CORE. Puede operar de forma **independiente** del resto del ecosistema.
 
@@ -21,8 +21,19 @@ CORE-PMP
 ├── 1. Project Engine                — Portfolios, Programs, Projects, WBS, Gantt, baseline
 ├── 2. Delivery Engine                — Traditional, Kanban, Scrum, Hybrid
 ├── 3. Work & Collaboration Engine    — Tasks, Tickets, Teams, Chat, Calendar, Documents
-└── 4. Governance & Improvement Engine — Risk, ISO/IEC 27001, Audits, Six Sigma/DMAIC, KPIs
+└── 4. Governance & Improvement Engine — Risk, ISO/IEC 27001, Audits, Six Sigma/DMAIC, Lean, KPIs
 ```
+
+## Frameworks (alcance oficial)
+
+```
+Management   → Traditional
+Delivery     → Scrum, Kanban, Hybrid
+Improvement  → Six Sigma (DMAIC), Lean
+Governance   → ISO/IEC 27001
+```
+
+Un proyecto puede combinar varios a la vez. Todo lo demás (Lean Six Sigma, PDCA, Theory of Constraints) queda como extensibilidad futura.
 
 ## Jerarquía de datos
 
@@ -63,4 +74,5 @@ En desarrollo, el backend autentica automáticamente al usuario admin del tenant
 ## Documentación
 
 - Especificación completa (Source of Truth): [docs/arq.md](docs/arq.md)
+- Anexo A — Lean e Ingeniería de Mejora: [docs/anexo1.md](docs/anexo1.md)
 - Instrucciones de proyecto para Claude Code: [CLAUDE.md](CLAUDE.md)
