@@ -120,6 +120,21 @@ npm run tenant -- delete --tax-id 7240020-8
 
 `create` inserta el tenant, el usuario owner (si no existe) y la vinculación con la app `core-pmp`. `delete` limpia tenant, memberships y tenant_applications asociados. Ambas operaciones corren en una transacción sobre `core_enterprise`.
 
+## Estado de Foundation (Fase 1)
+
+Implementado en `core-pmp` (BD PostgreSQL):
+- **`pmp_user_profiles`** — dominio propio de PMP (arq.md §79), separado de la identidad de Enterprise. Se auto-provisiona en el primer acceso (`backend/src/auth.ts` → `getOrCreateProfile`)
+- **`projects`** — entidad central (arq.md §14). `portfolio_id`/`program_id` nullable — esos niveles no existen aún
+- **`project_members`** — roles de proyecto (arq.md §20), contextuales por usuario
+
+Migración: [backend/migrations/001_foundation.sql](backend/migrations/001_foundation.sql)
+
+API: `GET/POST /api/projects`, `GET /api/projects/:id` (`backend/src/routes/projects.ts`), protegida por `requireSession` (cookie JWT de `/api/auth/session`).
+
+Frontend: [/proyectos](frontend/app/(app)/proyectos/page.tsx) — listado + formulario de creación (Server Action). El layout con sidebar vive en `frontend/app/(app)/layout.tsx` (route group compartido por `/dashboard` y `/proyectos`; toda pantalla nueva con navegación va dentro de `(app)/`).
+
+**Pendiente de Foundation:** RBAC real (hoy todo auto-provisiona como `PMP_ADMIN`, sin UI de invitación/roles — ver comentario `ponytail` en `auth.ts`), Groups, Teams, Portfolios, Programs.
+
 ## Roadmap (11 fases)
 Foundation → Work Engine → Project Planning (WBS/Gantt) → Kanban → Scrum → Collaboration → Ticketing → Control (riesgos/presupuesto) → Governance (ISO 27001) → Improvement (Six Sigma + Lean) → Ecosystem (CorePyme, Core Contador, Core Tributario, Core Bancario).
 

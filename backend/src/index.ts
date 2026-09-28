@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import { Client } from "pg";
+import { projectsRouter } from "./routes/projects.js";
 
 const PORT = process.env.PORT ?? 3011;
 const DEV_AUTOLOGIN = process.env.NODE_ENV !== "production";
@@ -73,6 +74,8 @@ app.post("/api/auth/logout", (_req, res) => {
   res.clearCookie("session");
   res.json({ ok: true });
 });
+
+app.use("/api/projects", projectsRouter);
 
 app.get("/health", (_req, res) => res.json({ ok: true }));
 

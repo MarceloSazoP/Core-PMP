@@ -1,7 +1,7 @@
 import { AppSidebar } from "@/components/AppSidebar";
 import { getSession } from "@/lib/session";
 
-export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession();
 
   return (
