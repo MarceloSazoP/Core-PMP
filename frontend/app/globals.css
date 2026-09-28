@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @import "@core-tecnologias-empresariales/core-ui/styles/tokens.css";
 
+/* Tailwind v4 no escanea node_modules por defecto — los paquetes @core-tecnologias-empresariales
+   viven ahí (file: deps), así que sin esto sus utilidades (ej. hidden/sm:flex del Breadcrumb)
+   solo "funcionan" por coincidencia si la misma clase ya se usa en código propio. */
+@source "../../../core-npm/packages/core-ui/dist/**/*.js";
+@source "../../../core-npm/packages/core-shell/dist/**/*.js";
+
 /* ponytail: el tailwind-preset de core-ui es Tailwind v3 (plugin vía require()) y no carga bajo
    el loader de config de Tailwind v4 + Turbopack ("Dynamic require of tailwindcss-animate is
    not supported", sin importar cómo se importe el plugin). Mientras no tenga una vía v4-nativa,

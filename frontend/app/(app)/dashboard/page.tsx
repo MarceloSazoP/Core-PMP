@@ -1,3 +1,4 @@
+import { Breadcrumb } from "@core-tecnologias-empresariales/core-shell";
 import { kpis, projects, risks, milestones, resourceLoad, statusLabel, statusColor } from "@/lib/mock-dashboard";
 import { ProgressBar } from "@/components/ProgressBar";
 import { StatusPill } from "@/components/StatusPill";
@@ -7,6 +8,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-full bg-bg-200 p-8">
       <div className="flex flex-col gap-8 max-w-7xl mx-auto w-full">
+        <Breadcrumb items={[{ label: "Inicio" }]} />
         <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {kpis.map((kpi) => (
             <div key={kpi.label} className="bg-bg-100 border border-border rounded-lg p-4">

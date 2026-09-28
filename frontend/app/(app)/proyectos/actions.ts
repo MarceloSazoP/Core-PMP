@@ -5,7 +5,6 @@ import { apiFetch } from "@/lib/api";
 
 export async function createProject(formData: FormData) {
   const payload = {
-    code: formData.get("code"),
     name: formData.get("name"),
     description: formData.get("description") || undefined,
     methodology: formData.get("methodology"),

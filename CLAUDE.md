@@ -129,9 +129,11 @@ Implementado en `core-pmp` (BD PostgreSQL):
 
 Migración: [backend/migrations/001_foundation.sql](backend/migrations/001_foundation.sql)
 
-API: `GET/POST /api/projects`, `GET /api/projects/:id` (`backend/src/routes/projects.ts`), protegida por `requireSession` (cookie JWT de `/api/auth/session`).
+API: `GET/POST /api/projects`, `GET /api/projects/:id`, `GET/POST /api/projects/:id/members` (`backend/src/routes/projects.ts`), protegida por `requireSession` (cookie JWT de `/api/auth/session`). Agregar miembro busca el email en Core Enterprise dentro del tenant actual — falla si el usuario no pertenece al tenant.
 
-Frontend: [/proyectos](frontend/app/(app)/proyectos/page.tsx) — listado + formulario de creación (Server Action). El layout con sidebar vive en `frontend/app/(app)/layout.tsx` (route group compartido por `/dashboard` y `/proyectos`; toda pantalla nueva con navegación va dentro de `(app)/`).
+Frontend: [/proyectos](frontend/app/(app)/proyectos/page.tsx) — listado + formulario de creación (Server Action), y [/proyectos/[id]](frontend/app/(app)/proyectos/[id]/page.tsx) — detalle con KPIs y equipo (agregar miembro por email + rol). El layout con sidebar vive en `frontend/app/(app)/layout.tsx` (route group compartido; toda pantalla nueva con navegación va dentro de `(app)/`).
+
+**Convención: breadcrumbs en toda página.** Usar `Breadcrumb` de `@core-tecnologias-empresariales/core-shell` (nunca uno propio), `items={[{label, href?}]}` sin `href` en el último elemento (la página actual). Patrón: `Inicio → Sección → (Detalle)`. Ver `dashboard/page.tsx`, `proyectos/page.tsx`, `proyectos/[id]/page.tsx`.
 
 **Pendiente de Foundation:** RBAC real (hoy todo auto-provisiona como `PMP_ADMIN`, sin UI de invitación/roles — ver comentario `ponytail` en `auth.ts`), Groups, Teams, Portfolios, Programs.
 
