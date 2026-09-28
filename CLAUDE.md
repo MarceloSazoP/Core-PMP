@@ -41,6 +41,10 @@ Un usuario puede tener roles distintos en diferentes proyectos.
 ## Arquitectura de datos
 Toda entidad queda bajo `TENANT → PORTFOLIO → PROJECT`, con configuración, roles, equipos, grupos y permisos asociados al proyecto.
 
+## Estilo visual
+- **Referencia:** [monday.com](https://monday.com) — tableros y datos densos con espaciado limpio, color con propósito (estados/prioridades)
+- **Tipografía:** IBM Plex (texto general), **IBM Plex Mono** para valores monetarios ($)
+
 ## MVP real
 Foundation (auth, tenant, RBAC) → Work Engine (tareas) → Planning (WBS, Gantt) → Kanban → Scrum → Collaboration (chat) → Ticketing → Control (riesgos, presupuesto, reportes).
 
