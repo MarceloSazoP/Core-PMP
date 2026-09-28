@@ -77,6 +77,18 @@ Core-PMP **puede ser independiente del ecosistema CORE** (funciona solo), pero s
 - **Realtime:** obligatorio para chat, Kanban, Scrum board, comentarios, notificaciones, presencia
 - **Events:** CORE Event Bus
 
+## Regla: usar siempre los paquetes @core-tecnologias-empresariales (`D:\Dev\core-npm`)
+Antes de escribir UI, auth, permisos, logging, i18n, etc. desde cero, **revisar si ya existe un paquete en `D:\Dev\core-npm\packages\`** y usarlo. No reimplementar lo que el monorepo compartido ya resuelve.
+
+Paquetes relevantes ya identificados:
+- **core-ui** — design tokens, 11 temas oficiales, componentes base (usa Radix + Tailwind preset)
+- **core-shell** — AppShell, Header, Sidebar, Breadcrumb, PageHeader (compone core-ui, filtra navegación con core-permissions)
+- **core-auth** — autenticación
+- **core-permissions** — RBAC / filtrado de navegación por permiso
+- **core-http, core-logging, core-i18n, core-events, core-notifications, core-config, core-utils, core-time, core-formatter, core-telemetry, core-security, core-jobs, core-mail, core-export, core-billing, core-audit, core-feature-flags, core-sdk-dte** — resto del monorepo, revisar antes de duplicar funcionalidad
+
+Si un paquete de `core-npm` no cubre completamente la necesidad, extenderlo o pedir que se extienda ahí — no bifurcar la lógica dentro de `core-pmp-10-2026`.
+
 ## Entorno local
 
 - **DB:** PostgreSQL local (`postgres@localhost`) — bases `core-pmp`, `core_enterprise`, `core_contador`, `corepyme`

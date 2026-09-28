@@ -61,6 +61,7 @@ Core-PMP funciona de forma independiente, y se integra vía **tenant** cuando co
 - **Base de datos:** PostgreSQL / Supabase
 - **Auth:** Core Enterprise (tenant, identity, RBAC)
 - **Realtime:** obligatorio para chat, Kanban, Scrum board, notificaciones y presencia
+- **UI/Shell/Auth/Permisos:** paquetes compartidos `@core-tecnologias-empresariales/*` en `D:\Dev\core-npm` (core-ui, core-shell, core-auth, core-permissions, etc.) — siempre se reutilizan en vez de reimplementar
 
 ## Entorno local
 
